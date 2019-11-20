@@ -13,7 +13,5 @@ class RepositoryImpl
         private val currencyResource: Requester
     ): Repository {
 
-    override fun getCurrencies(): Observable<List<Coin>> = currencyResource
-                                                            .getCurrencies()
-                                                            .subscribeOn(Schedulers.newThread())
+    override fun getCurrencies(): Observable<List<Coin>> = currencyResource.getCurrencies()
 }

@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 class GetCoinUseCase @Inject constructor(private val repository: Repository) {
 
-    fun downloadCurrencies(): Observable<List<Coin>> = repository.getCurrencies()
+    fun invoke(): Observable<List<Coin>> = repository.getCurrencies()
 }
