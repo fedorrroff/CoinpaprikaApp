@@ -1,5 +1,6 @@
 package com.fedorrroff.coinpaprikaapp.api
 
+import com.fedorrroff.coinpaprikaapp.models.Coin
 import com.fedorrroff.coinpaprikaapp.models.Currencies
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -7,5 +8,5 @@ import retrofit2.http.GET
 interface APIService {
 
     @GET( "coins")
-    fun getCurrencies() : Observable<Currencies>
+    fun getCurrencies() : Observable<List<Coin>>
 }

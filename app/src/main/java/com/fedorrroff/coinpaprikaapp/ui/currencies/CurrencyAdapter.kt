@@ -13,15 +13,10 @@ import com.fedorrroff.coinpaprikaapp.R
 import com.fedorrroff.coinpaprikaapp.models.Coin
 
 class CurrencyAdapter(
-    startItems: List<Coin>,
-    val items: ArrayList<Coin> = ArrayList()
+    private val items: MutableList<Coin> = mutableListOf()
 ) : RecyclerView.Adapter<CurrencyAdapter.CoinViewHolder>() {
 
-    init {
-        items.addAll(startItems)
-    }
-
-    private lateinit var listener: OnItemClickListener
+    private var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,6 +33,7 @@ class CurrencyAdapter(
     }
 
     fun addAllItems(currencies: List<Coin>) {
+        items.clear()
         items.addAll(currencies)
         notifyDataSetChanged()
     }
@@ -49,7 +45,7 @@ class CurrencyAdapter(
         val requestOptions: RequestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)
         ) : RecyclerView.ViewHolder(view) {
 
-        fun bind(coin: Coin?, listener: OnItemClickListener) {
+        fun bind(coin: Coin?, listener: OnItemClickListener?) {
             Glide.with(itemView)
                 .load("https://static2.coinpaprika.com/coin/" + (coin?.id ?: "") + "/logo.png")
                 .apply(requestOptions)
@@ -59,7 +55,7 @@ class CurrencyAdapter(
 
             itemView.setOnClickListener {
                 if (coin != null) {
-                    listener.onItemClick(coin)
+                    listener?.onItemClick(coin)
                 }
             }
         }

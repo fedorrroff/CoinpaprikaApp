@@ -17,11 +17,11 @@ abstract class BaseFragment : Fragment(){
 
     protected abstract fun injectDependencies(fragmentPresenterComponent: FragmentPresenterComponent)
 
-    abstract fun attachViewToPresenter()
+//    abstract fun attachViewToPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies(getPresenterComponent())
-        attachViewToPresenter()
+//        attachViewToPresenter()
     }
 }

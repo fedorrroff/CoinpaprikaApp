@@ -2,6 +2,8 @@ package com.fedorrroff.coinpaprikaapp.di.main
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import com.fedorrroff.coinpaprikaapp.models.Coin
+import com.fedorrroff.coinpaprikaapp.ui.currencies.GetCoinUseCase
 import com.fedorrroff.coinpaprikaapp.ui.navigation.Navigator
 import com.fedorrroff.coinpaprikaapp.ui.navigation.NavigatorImpl
 import dagger.Module

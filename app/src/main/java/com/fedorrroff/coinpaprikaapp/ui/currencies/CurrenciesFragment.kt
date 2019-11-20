@@ -1,30 +1,33 @@
 package com.fedorrroff.coinpaprikaapp.ui.currencies
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fedorrroff.coinpaprikaapp.R
 import com.fedorrroff.coinpaprikaapp.core.BaseFragment
+import com.fedorrroff.coinpaprikaapp.databinding.CurrenciesFragmentBinding
 import com.fedorrroff.coinpaprikaapp.di.FragmentPresenterComponent
+import com.fedorrroff.coinpaprikaapp.models.Coin
 import com.fedorrroff.coinpaprikaapp.models.Currencies
 import javax.inject.Inject
 
 
 class CurrenciesFragment : BaseFragment() {
 
-    private val currencyAdapter: CurrencyAdapter = CurrencyAdapter(emptyList())
-    private lateinit var recyclerView: RecyclerView
-
     fun newInstance() : CurrenciesFragment = CurrenciesFragment()
 
-    @Inject lateinit var currenciesFragmentPresenter: CurrenciesFragmentPresenter
+    @Inject lateinit var viewModel: CurrenciesViewModel
 
     override fun injectDependencies(fragmentPresenterComponent: FragmentPresenterComponent) = fragmentPresenterComponent.inject(this)
-
-    override fun attachViewToPresenter() = currenciesFragmentPresenter.attachView(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,20 +37,26 @@ class CurrenciesFragment : BaseFragment() {
         return inflater.inflate(R.layout.currencies_fragment, container, false)
     }
 
+    private lateinit var binding: CurrenciesFragmentBinding
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.rw_currencies)
-
-        recyclerView.adapter = currencyAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        currenciesFragmentPresenter.downloadCurrencies()
+        binding = DataBindingUtil.setContentView(activity as Activity, R.layout.currencies_fragment)
+        binding.viewModel = viewModel
+        viewModel.bind(this)
+        viewModel.initCurrencies()
+        setCurrenciesList()
     }
 
-    fun displayCurrencies(currencies: Currencies) {
-        val coins = currencies.coins
+    fun setCurrenciesList() {
+        val layoutManager = LinearLayoutManager(context)
+        binding.listCoins.layoutManager = layoutManager
 
-        currencyAdapter.addAllItems(currencies.coins)
+        binding.listCoins.adapter = CurrencyAdapter().apply {
+            viewModel.currencies.observe(this@CurrenciesFragment, Observer {
+                it.let(::addAllItems)
+            })
+        }
     }
 }
