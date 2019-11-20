@@ -23,6 +23,11 @@ android {
     dataBinding {
         enabled true
     }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/test/java/2'] 
+            res.srcDirs =['src/main/res', 'src/test/res']
+} }
 }
 
 dependencies {
@@ -34,6 +39,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // required if you want to use Mockito for unit tests
+    testImplementation 'org.mockito:mockito-core:2.24.5'
+    // required if you want to use Mockito for Android tests
+    androidTestImplementation 'org.mockito:mockito-android:2.24.5'
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+// https://mvnrepository.com/artifact/androidx.arch.core/core-testing
+    testImplementation group: 'androidx.arch.core', name: 'core-testing', version: '2.0.0-alpha1'
+
 
     implementation 'com.google.dagger:dagger:2.24'
     kapt 'com.google.dagger:dagger-compiler:2.24'
