@@ -2,17 +2,12 @@ package com.fedorrroff.coinpaprikaapp.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.MutableLiveData
 import com.fedorrroff.coinpaprikaapp.LifecycleOwnerStub
 import com.fedorrroff.coinpaprikaapp.models.Coin
 import com.fedorrroff.coinpaprikaapp.ui.currencies.CurrenciesViewModel
-import com.fedorrroff.coinpaprikaapp.ui.currencies.GetCoinUseCase
+import com.fedorrroff.coinpaprikaapp.usecases.GetCoinUseCase
 import com.fedorrroff.coinpaprikaapp.ui.navigation.Navigator
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -47,7 +42,7 @@ class CurrenciesViewModelTest {
         val list = listOf(Coin("11", "Bitcoin", "BTC", 1, false, true, "coin"),
             Coin("11", "Bitcoin", "BTC", 1, false, true, "token"))
 
-        Mockito.`when`(getCoinUseCase.invoke()).thenReturn(Observable.just(list))
+        Mockito.`when`(getCoinUseCase.invoke()).thenReturn(Observable.just(GetCoinUseCase.UseCaseResult.Success(list)))
 
         lifecycleOwner.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         Assert.assertEquals(sut.currencies.value, list)
