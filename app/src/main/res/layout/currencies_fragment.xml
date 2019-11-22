@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.fedorrroff.coinpaprikaapp.ui.currencies.CurrenciesViewModel" />-->
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.fedorrroff.coinpaprikaapp.ui.currencies.CurrenciesViewModel" />
     </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/error"
+        android:visibility="@{viewModel.showError ? View.VISIBLE : View.GONE}" />
+
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:visibility="@{viewModel.loading}"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_coins"
