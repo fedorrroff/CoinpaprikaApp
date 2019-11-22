@@ -1,5 +1,3 @@
-package com.fedorrroff.coinpaprikaapp
-
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry

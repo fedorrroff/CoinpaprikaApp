@@ -13,12 +13,4 @@ abstract class BaseViewModel: ViewModel() {
         disposables.clear()
         super.onCleared()
     }
-
-    protected fun showLoading() {
-        loading.postValue(true)
-    }
-
-    protected fun hideLoading() {
-        loading.postValue(false)
-    }
 }

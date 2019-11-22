@@ -22,7 +22,8 @@
         android:id="@+id/simpleProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:visibility="@{viewModel.loading}"/>
+        android:layout_gravity="center"
+        app:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_coins"

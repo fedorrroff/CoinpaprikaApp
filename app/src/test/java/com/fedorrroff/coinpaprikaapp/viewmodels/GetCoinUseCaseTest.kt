@@ -1,5 +1,6 @@
 package com.fedorrroff.coinpaprikaapp.viewmodels
 
+import RxJavaTestHooksResetRule
 import com.fedorrroff.coinpaprikaapp.models.Coin
 import com.fedorrroff.coinpaprikaapp.repository.RepositoryImpl
 import com.fedorrroff.coinpaprikaapp.usecases.GetCoinUseCase
@@ -54,6 +55,6 @@ class GetCoinUseCaseTest {
 
         Mockito.`when`(repository.getCurrencies()).thenReturn(Observable.just(list))
 
-        sut().test().assertValueAt(1) { it is GetCoinUseCase.UseCaseResult.Success}
+        sut().test().assertValueAt(1, GetCoinUseCase.UseCaseResult.Success(list))
     }
 }

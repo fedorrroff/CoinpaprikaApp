@@ -1,12 +1,12 @@
 package com.fedorrroff.coinpaprikaapp.viewmodels
 
+import LifecycleOwnerStub
+import RxJavaTestHooksResetRule
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Lifecycle
-import com.fedorrroff.coinpaprikaapp.LifecycleOwnerStub
 import com.fedorrroff.coinpaprikaapp.models.Coin
 import com.fedorrroff.coinpaprikaapp.ui.currencies.CurrenciesViewModel
 import com.fedorrroff.coinpaprikaapp.usecases.GetCoinUseCase
-import com.fedorrroff.coinpaprikaapp.ui.navigation.Navigator
 import io.reactivex.Observable
 import org.junit.Assert
 import org.junit.Before
@@ -25,7 +25,6 @@ class CurrenciesViewModelTest {
     @get:Rule var rule: TestRule = InstantTaskExecutorRule()
 
     @Mock lateinit var getCoinUseCase: GetCoinUseCase
-    @Mock lateinit var navigator: Navigator
 
     private val lifecycleOwner = LifecycleOwnerStub()
 
@@ -33,7 +32,7 @@ class CurrenciesViewModelTest {
 
     @Before
     fun setUp() {
-        sut = CurrenciesViewModel(navigator, getCoinUseCase)
+        sut = CurrenciesViewModel(getCoinUseCase)
         sut.bind(lifecycleOwner)
     }
 
