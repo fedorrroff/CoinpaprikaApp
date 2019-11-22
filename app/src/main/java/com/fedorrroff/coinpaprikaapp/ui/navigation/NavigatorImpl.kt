@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.fedorrroff.coinpaprikaapp.R
 import com.fedorrroff.coinpaprikaapp.ui.currencies.CurrenciesFragment
-import javax.inject.Singleton
 
-@Singleton
 class NavigatorImpl(activity: AppCompatActivity) : Navigator{
 
     private val FRAGMENT_CONTAINER = R.id.fragment_container
