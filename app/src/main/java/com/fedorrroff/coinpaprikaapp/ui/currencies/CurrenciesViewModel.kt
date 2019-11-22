@@ -3,7 +3,6 @@ package com.fedorrroff.coinpaprikaapp.ui.currencies
 import androidx.lifecycle.*
 import com.fedorrroff.coinpaprikaapp.core.BaseViewModel
 import com.fedorrroff.coinpaprikaapp.models.Coin
-import com.fedorrroff.coinpaprikaapp.ui.navigation.Navigator
 import com.fedorrroff.coinpaprikaapp.usecases.GetCoinUseCase
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -11,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class CurrenciesViewModel @Inject constructor(
-    private val navigator: Navigator,
     private val useCase: GetCoinUseCase
 ) : BaseViewModel(), LifecycleObserver{
 
