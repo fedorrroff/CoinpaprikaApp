@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.fedorrroff.coinpaprikaapp.api.Requester
 import com.fedorrroff.coinpaprikaapp.di.api.APIModule
-import com.fedorrroff.coinpaprikaapp.di.usecases.UseCaseModule
 import com.fedorrroff.coinpaprikaapp.repository.Repository
-import com.fedorrroff.coinpaprikaapp.ui.currencies.GetCoinUseCase
 import com.fedorrroff.coinpaprikaapp.ui.navigation.Navigator
+import com.fedorrroff.coinpaprikaapp.usecases.GetCoinsUseCase
 import dagger.Component
 
-@Component(modules = arrayOf(ActivityModule::class, APIModule::class, RepositoryModule::class, UseCaseModule::class))
+@Component(modules = [ActivityModule::class, APIModule::class, RepositoryModule::class, ViewModelModule::class])
 interface MainComponent {
 
     fun activity() : AppCompatActivity

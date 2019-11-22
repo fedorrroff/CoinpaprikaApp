@@ -1,6 +1,5 @@
 package com.fedorrroff.coinpaprikaapp.ui.currencies
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.fedorrroff.coinpaprikaapp.core.BaseViewModel
 import com.fedorrroff.coinpaprikaapp.models.Coin
@@ -17,6 +16,7 @@ class CurrenciesViewModel @Inject constructor(
 ) : BaseViewModel(), LifecycleObserver{
 
     val currencies = MutableLiveData<List<Coin>>()
+    val showError = MutableLiveData<Boolean>()
 
     fun bind(lifecycleOwner: LifecycleOwner) {
         lifecycleOwner.lifecycle.addObserver(this)
