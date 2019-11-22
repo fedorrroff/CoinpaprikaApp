@@ -10,6 +10,4 @@ data class Coin(
     @SerializedName("is_new") val is_new : Boolean,
     @SerializedName("is_active") val is_active : Boolean,
     @SerializedName("type") val type : String
-) {
-
-}
+)

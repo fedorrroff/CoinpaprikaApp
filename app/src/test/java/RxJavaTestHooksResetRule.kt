@@ -1,5 +1,3 @@
-package com.fedorrroff.coinpaprikaapp.viewmodels
-
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

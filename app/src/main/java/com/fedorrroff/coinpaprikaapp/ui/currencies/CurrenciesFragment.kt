@@ -19,9 +19,18 @@ class CurrenciesFragment : BaseFragment() {
 
     fun newInstance() : CurrenciesFragment = CurrenciesFragment()
 
-    @Inject lateinit var viewModel: CurrenciesViewModel
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+    private val viewModel: CurrenciesViewModel by lazy {
+        ViewModelProviders.of(this, vmFactory).get(CurrenciesViewModel::class.java)
+    }
 
     private lateinit var binding: CurrenciesFragmentBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        getMainComponent().inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,18 +38,13 @@ class CurrenciesFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.currencies_fragment, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
         viewModel.bind(this)
         setCurrenciesList()
+        return binding.root
     }
 
     private fun setCurrenciesList() {

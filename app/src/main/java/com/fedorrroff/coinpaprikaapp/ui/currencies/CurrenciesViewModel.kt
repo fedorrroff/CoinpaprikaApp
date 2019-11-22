@@ -29,7 +29,7 @@ class CurrenciesViewModel @Inject constructor(
                 when(it) {
                     is GetCoinUseCase.UseCaseResult.Success -> currencies.postValue(it.coins)
                     is GetCoinUseCase.UseCaseResult.Error -> {
-                        Log.d("M_CurrenciesViewModel", "Error while loading has been occurred")
+                        showError.postValue(true)
                     }
                 }
             }

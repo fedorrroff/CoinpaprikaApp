@@ -25,7 +25,7 @@ class CurrencyAdapter(
     }
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
-        holder.bind(items.get(position), listener)
+        holder.bind(items[position], listener)
     }
 
     override fun getItemCount(): Int {
@@ -40,9 +40,11 @@ class CurrencyAdapter(
 
     inner class CoinViewHolder (
         view: View,
-        val iv_logo: ImageView = view.findViewById(R.id.image_single),
-        val tv_name: TextView = view.findViewById(R.id.tv_name_single),
-        val requestOptions: RequestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)
+        private val iv_logo: ImageView = view.findViewById(R.id.image_single),
+        private val tv_name: TextView = view.findViewById(R.id.tv_name_single),
+        private val requestOptions: RequestOptions = RequestOptions().diskCacheStrategy(
+            DiskCacheStrategy.NONE
+        )
         ) : RecyclerView.ViewHolder(view) {
 
         fun bind(coin: Coin?, listener: OnItemClickListener?) {
@@ -69,4 +71,3 @@ class CurrencyAdapter(
         fun onItemClick(coin: Coin)
     }
 }
-
